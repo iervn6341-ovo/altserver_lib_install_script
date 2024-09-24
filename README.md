@@ -24,7 +24,11 @@ cd AltServer-Linux-PyScript
 sudo python3 main.py
 ```
 
-最後執行 main.py 也可以用 nohup 啟
+最後執行 main.py 也可以用 nohup 起
 ```bash
 nohup sudo python3 main.py > /dev/null 2>&1 &
 ```
+
+## 聲明
+
+本人不擁有 [powenn/AltServer-Linux-PyScript](https://github.com/powenn/AltServer-Linux-PyScript) 的任何所有權。
