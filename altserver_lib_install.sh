@@ -28,78 +28,78 @@ install_basic_package(){
   		libcurl4-openssl-dev \
 		libusb-1.0-0-dev \
 		libavahi-compat-libdnssd-dev \
-		python3-pip > /dev/null 2>&1 &
+		python3-pip > /dev/null 2>&1
 
-	$SUDO pip3 install cython --break-system-packages > /dev/null 2>&1 &
+	$SUDO pip3 install cython --break-system-packages > /dev/null 2>&1
 }	
 
 pull_git_repo(){
 	cd $HOME/libimobile-dependencies
-	git clone https://github.com/libimobiledevice/libplist.git > /dev/null 2>&1 &
-	git clone https://github.com/libimobiledevice/libimobiledevice-glue.git > /dev/null 2>&1 &
-	git clone https://github.com/libimobiledevice/libusbmuxd.git > /dev/null 2>&1 &
-	git clone https://github.com/libimobiledevice/libtatsu.git > /dev/null 2>&1 &
-	git clone https://github.com/libimobiledevice/libimobiledevice.git > /dev/null 2>&1 &
-	git clone https://github.com/tihmstar/usbmuxd2.git > /dev/null 2>&1 &
-	git clone https://github.com/tihmstar/libgeneral.git > /dev/null 2>&1 &
+	git clone https://github.com/libimobiledevice/libplist.git > /dev/null 2>&1
+	git clone https://github.com/libimobiledevice/libimobiledevice-glue.git > /dev/null 2>&1
+	git clone https://github.com/libimobiledevice/libusbmuxd.git > /dev/null 2>&1
+	git clone https://github.com/libimobiledevice/libtatsu.git > /dev/null 2>&1
+	git clone https://github.com/libimobiledevice/libimobiledevice.git > /dev/null 2>&1
+	git clone https://github.com/tihmstar/usbmuxd2.git > /dev/null 2>&1
+	git clone https://github.com/tihmstar/libgeneral.git > /dev/null 2>&1
 }
 
 compile_libplist(){
 	cd "$HOME/libimobile-dependencies/libplist"
-	./autogen.sh > /dev/null 2>&1 &
-	make > /dev/null 2>&1 &
-	$SUDO make install > /dev/null 2>&1 &
+	./autogen.sh > /dev/null 2>&1
+	make > /dev/null 2>&1
+	$SUDO make install > /dev/null 2>&1
 }
 
 compile_libimobiledevice_glue(){
 	cd "$HOME/libimobile-dependencies/libimobiledevice-glue"
-	./autogen.sh > /dev/null 2>&1 &
-	make > /dev/null 2>&1 &
-	$SUDO make install > /dev/null 2>&1 &
+	./autogen.sh > /dev/null 2>&1
+	make > /dev/null 2>&1
+	$SUDO make install > /dev/null 2>&1
 }
 
 compile_libusbmuxd(){
 	cd "$HOME/libimobile-dependencies/libusbmuxd"
-	./autogen.sh > /dev/null 2>&1 &
-	make > /dev/null 2>&1 &
-	$SUDO make install > /dev/null 2>&1 &
+	./autogen.sh > /dev/null 2>&1
+	make > /dev/null 2>&1
+	$SUDO make install > /dev/null 2>&1
 }
 
 compile_libtatsu(){
 	cd "$HOME/libimobile-dependencies/libtatsu"
-	./autogen.sh > /dev/null 2>&1 &
-	make > /dev/null 2>&1 &
-	$SUDO make install > /dev/null 2>&1 &
+	./autogen.sh > /dev/null 2>&1
+	make > /dev/null 2>&1
+	$SUDO make install > /dev/null 2>&1
 }
 
 compile_libimobiledevice(){
 	cd "$HOME/libimobile-dependencies/libimobiledevice"
-	./autogen.sh > /dev/null 2>&1 &
-	make > /dev/null 
-	$SUDO make install > /dev/null 2>&1 &
+	./autogen.sh > /dev/null 2>&1
+	make > /dev/null 2>&1
+	$SUDO make install > /dev/null 2>&1
 }
 
 compile_usbmuxd2(){
 	cd "$HOME/libimobile-dependencies/libgeneral"
-	./autogen.sh
-	make > /dev/null 2>&1 &
-	$SUDO make install > /dev/null 2>&1 &
+	./autogen.sh > /dev/null 2>&1
+	make > /dev/null 2>&1
+	$SUDO make install > /dev/null 2>&1
 
-	cd "$HOME/libimobil-dependencies/usbmuxd2"
-	./configure CC=clang CXX=clang++ > /dev/null 2>&1 &
-	make > /dev/null 2>&1 &
-	$SUDO make install > /dev/null 2>&1 &
+	cd "$HOME/libimobile-dependencies/usbmuxd2"
+	./configure CC=clang CXX=clang++ > /dev/null 2>&1
+	make > /dev/null 2>&1
+	$SUDO make install > /dev/null 2>&1
 }
 
-mkdir "$HOME/libimobile-dependencies"
-echo "Installing deb and python package"
+mkdir -p "$HOME/libimobile-dependencies"
+echo "Installing deb and python packages"
 install_basic_package
 
-echo "Pulling git repo"
+echo "Pulling git repos"
 pull_git_repo
 
 if which plistutil > /dev/null 2>&1; then
-	echo "libplist has installed"
+	echo "libplist is already installed"
 else
 	echo "installing libplist"
 	compile_libplist
@@ -120,6 +120,5 @@ compile_libimobiledevice
 echo "installing usbmuxd2"
 compile_usbmuxd2
 
-echo "Done installing. removing libimobile-dependencies folder"
+echo "Done installing. Removing libimobile-dependencies folder"
 $SUDO rm -rf "$HOME/libimobile-dependencies"
-
